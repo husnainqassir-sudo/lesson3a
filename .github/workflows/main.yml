@@ -1,0 +1,28 @@
+name: Lint HTML
+
+on:
+push:
+branches: ["main"]
+pull_request:
+branches: ["main"]
+
+jobs:
+html-lint:
+name: LintHTML files
+runs-on: ubuntu-latest
+
+steps:
+-name: checkout repository
+uses: actions/heckout@v4
+
+-name: Setup Node.js
+uses: actions/setup-node@v4
+with:
+node-version: "18"
+
+-name: install dependencies 
+run:
+npm-install --save-dev htmllint
+
+-name: Run HTMLHint
+run: npx htmlhint"*/*.html"
